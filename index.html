@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Quote Generator</title>
+    <style>
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body styling */
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #081b29;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 3rem;
+            font-weight: 200;
+            font-family: fantasy;
+            color: #ededed;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Button styling */
+        .button {
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            padding-block: 1.2rem;
+            padding-inline: 1.25rem;
+            background-color: rgb(0 107 179);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            gap: 10px;
+            font-weight: bold;
+            border: 3px solid #ffffff4d;
+            outline: none;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Hover Effect */
+        .button:hover {
+            transform: scale(1.05);
+            border-color: #fff9;
+        }
+
+      
+        .icon {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            #quoteDisplay {
+                color: #ededed;
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-align: center;
+                padding: 20px;
+                max-width: 100%; /* Makes sure content doesn't overflow */
+                word-wrap: break-word; /* Forces the text to wrap */
+                overflow-wrap: break-word;
+        }
+
+    
+        footer {
+            color: #ededed;
+            font-size: 1rem;
+            font-weight: bold;
+            top: -118px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .button {
+                font-size: 1rem;
+                padding-block: 1rem;
+                padding-inline: 1rem;
+            }
+
+            #quoteDisplay {
+                font-size: 1.2rem;
+            }
+
+            footer {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .button {
+                font-size: 0.9rem;
+                padding-block: 0.8rem;
+                padding-inline: 0.8rem;
+            }
+
+            #quoteDisplay {
+                font-size: 1rem;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Quote Generator</h1>
+    <button id="onclick" class="button">Generate Quote</button>
+    <div id="quoteDisplay"></div>
+    <footer>©CopyRight 2024 by Sakshyam Kharel | All rights reserved</footer>
+
+    <script>
+        const quotes = [
+            {
+                author: "Nelson Mandela",
+                quote: "The greatest glory in living lies not in never falling, but in rising every time we fall."
+            },
+            {
+                author: "Steve Jobs",
+                quote: "Your time is limited, so don't waste it living someone else's life."
+            },
+            {
+                author: "Eleanor Roosevelt",
+                quote: "Do one thing every day that scares you."
+            },
+            {
+                author: "Aristotle",
+                quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+            },
+            {
+                author: "Mahatma Gandhi",
+                quote: "Live as if you were to die tomorrow. Learn as if you were to live forever."
+            },
+            {
+                "author": "Steve Jobs",
+                "quote": "Stay hungry, stay foolish."
+            },
+            {
+                "author": "Mahatma Gandhi",
+                "quote": "Be the change you wish to see in the world."
+            },
+            {
+                "author": "Winston Churchill",
+                "quote": "Never, never, never give up."
+            },
+            {
+                "author": "Albert Einstein",
+                "quote": "Imagination is everything."
+            },
+            {
+                "author": "Helen Keller",
+                "quote": "Life is either a daring adventure or nothing."
+            },
+            {
+                "author": "Confucius",
+                "quote": "It does not matter how slowly you go as long as you do not stop."
+            },
+            {
+                "author": "Ralph Waldo Emerson",
+                "quote": "Hitch your wagon to a star."
+            },
+            {
+                "author": "Henry Ford",
+                "quote": "Whether you think you can, or you think you can't – you're right."
+            },
+            {
+                "author": "Theodore Roosevelt",
+                "quote": "Believe you can and you're halfway there."
+            },
+            {
+                "author": "Nelson Mandela",
+                "quote": "It always seems impossible until it's done."
+            },
+
+            {
+                "author": "Thomas Edison",
+                "quote": "Genius is one percent inspiration and ninety-nine percent perspiration."
+            },
+            {
+                "author": "Zig Ziglar",
+                "quote": "You don’t have to be great to start, but you have to start to be great."
+            },
+            {
+                "author": "Oprah Winfrey",
+                "quote": "The biggest adventure you can take is to live the life of your dreams."
+            },
+            {
+                "author": "Michael Jordan",
+                "quote": "I can accept failure, everyone fails at something. But I can’t accept not trying."
+            },
+            {
+                "author": "Jim Rohn",
+                "quote": "Success is nothing more than a few simple disciplines, practiced every day."
+            },
+            {
+                "author": "Babe Ruth",
+                "quote": "Every strike brings me closer to the next home run."
+            },
+            {
+                "author": "Walt Disney",
+                "quote": "The way to get started is to quit talking and begin doing."
+            },
+            {
+                "author": "Wayne Gretzky",
+                "quote": "You miss 100% of the shots you don’t take."
+            },
+            {
+                "author": "Eleanor Roosevelt",
+                "quote": "You gain strength, courage, and confidence by every experience in which you really stop to look fear in the face."
+            },
+            {
+                "author": "J.K. Rowling",
+                "quote": "It is our choices that show what we truly are, far more than our abilities."
+            }
+        
+        ];
+
+        const quoteButton = document.getElementById("onclick");
+        const quoteDisplay = document.getElementById("quoteDisplay");
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex].quote;
+            const author = quotes[randomIndex].author;
+            typeQuote(`"${quote}" -- ${author}`);
+        }
+
+        function typeQuote(text) {
+            const textArray = text.split("");
+            quoteDisplay.innerText = "";
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < textArray.length) {
+                    if (textArray[i] === " ") {
+                        quoteDisplay.innerHTML += "&nbsp;";
+                    } else {
+                        quoteDisplay.innerText += textArray[i];
+                    }
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+
+        quoteButton.addEventListener("click", generateQuote);
+    </script>
+</body>
+</html>
